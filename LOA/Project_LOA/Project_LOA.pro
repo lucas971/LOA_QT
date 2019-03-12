@@ -32,7 +32,8 @@ SOURCES += \
     team.cpp \
     treeitem.cpp \
     treemodel.cpp \
-    sport.cpp
+    sport.cpp \
+    branch.cpp
 
 HEADERS += \
         mainwindow.h \

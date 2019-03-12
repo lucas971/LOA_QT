@@ -17,7 +17,8 @@ class Branch
 
 public:
     Branch();
-    Branch(const Branch &);
+    Branch(Team team1, Team team2, bool finished, int win, int s1, int s2);
+    Branch(const Branch & branch);
     ~Branch();
 
 };
