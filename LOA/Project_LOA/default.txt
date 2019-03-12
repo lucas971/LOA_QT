@@ -1,0 +1,7 @@
+A		Lettre		
+    1		Nombre	 
+    2		Nombre
+B		Lettre
+    1		Nombre
+C		Lettre
+D		Lettre

@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupUi(this);
 
     QStringList headers;
-    headers << tr("Title") << tr("Description");
+    headers << tr("Nom") << tr("Type");
 
     QFile file(":/default.txt");
     file.open(QIODevice::ReadOnly);
