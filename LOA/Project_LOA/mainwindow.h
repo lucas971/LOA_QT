@@ -22,6 +22,7 @@ private slots:
     void insertRow();
     bool removeColumn();
     void removeRow();
+    void addPlayer();
 };
 
 #endif // MAINWINDOW_H

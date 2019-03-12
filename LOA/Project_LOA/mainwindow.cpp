@@ -134,3 +134,7 @@ void MainWindow::updateActions()
             statusBar()->showMessage(tr("Position: (%1,%2) in top level").arg(row).arg(column));
     }
 }
+
+void MainWindow::addPlayer(){
+
+}
