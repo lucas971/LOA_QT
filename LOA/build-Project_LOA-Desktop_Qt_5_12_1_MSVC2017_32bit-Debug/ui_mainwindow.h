@@ -12,13 +12,15 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTreeView>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -33,8 +35,10 @@ public:
     QAction *removeColumnAction;
     QAction *insertChildAction;
     QWidget *centralwidget;
-    QVBoxLayout *vboxLayout;
+    QGraphicsView *graphicsView;
     QTreeView *view;
+    QLineEdit *lineEdit;
+    QLabel *label;
     QMenuBar *menubar;
     QMenu *fileMenu;
     QMenu *actionsMenu;
@@ -44,7 +48,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(573, 468);
+        MainWindow->resize(706, 468);
         exitAction = new QAction(MainWindow);
         exitAction->setObjectName(QString::fromUtf8("exitAction"));
         insertRowAction = new QAction(MainWindow);
@@ -59,24 +63,28 @@ public:
         insertChildAction->setObjectName(QString::fromUtf8("insertChildAction"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        vboxLayout = new QVBoxLayout(centralwidget);
-        vboxLayout->setSpacing(0);
-        vboxLayout->setContentsMargins(0, 0, 0, 0);
-        vboxLayout->setObjectName(QString::fromUtf8("vboxLayout"));
+        graphicsView = new QGraphicsView(centralwidget);
+        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+        graphicsView->setGeometry(QRect(270, 0, 441, 411));
+        graphicsView->setMinimumSize(QSize(256, 0));
         view = new QTreeView(centralwidget);
         view->setObjectName(QString::fromUtf8("view"));
+        view->setGeometry(QRect(0, 40, 271, 371));
         view->setAlternatingRowColors(true);
         view->setSelectionBehavior(QAbstractItemView::SelectItems);
         view->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
         view->setAnimated(false);
         view->setAllColumnsShowFocus(true);
-
-        vboxLayout->addWidget(view);
-
+        lineEdit = new QLineEdit(centralwidget);
+        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        lineEdit->setGeometry(QRect(110, 6, 151, 31));
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(4, 15, 101, 16));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 573, 31));
+        menubar->setGeometry(QRect(0, 0, 706, 26));
         fileMenu = new QMenu(menubar);
         fileMenu->setObjectName(QString::fromUtf8("fileMenu"));
         actionsMenu = new QMenu(menubar);
@@ -129,6 +137,7 @@ public:
 #ifndef QT_NO_SHORTCUT
         insertChildAction->setShortcut(QApplication::translate("MainWindow", "Ctrl+N", nullptr));
 #endif // QT_NO_SHORTCUT
+        label->setText(QApplication::translate("MainWindow", "Recherche :", nullptr));
         fileMenu->setTitle(QApplication::translate("MainWindow", "&File", nullptr));
         actionsMenu->setTitle(QApplication::translate("MainWindow", "&Actions", nullptr));
     } // retranslateUi
