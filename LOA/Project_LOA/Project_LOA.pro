@@ -28,11 +28,11 @@ SOURCES += \
         mainwindow.cpp \
     player.cpp \
     tournament.cpp \
-    tournamenttreemodel.cpp \
     team.cpp \
     treeitem.cpp \
     treemodel.cpp \
-    sport.cpp
+    sport.cpp \
+    tree.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,14 +42,12 @@ HEADERS += \
     tree.h \
     branch.h \
     team.h \
-    tournamentTreeModel.h \
     tournamentDelegate.h \
-    tournamentView.h
+    tournamentView.h \
     delegate.h \
     treeitem.h \
-    treeitem.h \
     treemodel.h \
-    treemodel.h
+    tree.h
 
 FORMS += \
         mainwindow.ui
