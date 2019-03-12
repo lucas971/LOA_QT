@@ -36,12 +36,14 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     player.h \
-    tournamenttreemodel.h \
     tournament.h \
     sport.h \
     tree.h \
     branch.h \
     team.h \
+    tournamentTreeModel.h \
+    tournamentDelegate.h \
+    tournamentView.h
     delegate.h \
     treeitem.h \
     treeitem.h \
