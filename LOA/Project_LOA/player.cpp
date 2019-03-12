@@ -32,8 +32,13 @@ Player::Player(std::string username, std::string email, float weight, float heig
     return;
 }
 
-Player::Player(const Player &){
-
+Player::Player(const Player & player){
+    _id=_player_id++;
+    _username=player._username;
+    _email=player._email;
+    _weight=player._weight;
+    _height=player._height;
+    _age=player._age;
 }
 
 Player::~Player(){
