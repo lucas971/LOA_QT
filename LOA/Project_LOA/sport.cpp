@@ -1,8 +1,6 @@
 #include "sport.h"
 #include <string>
 
-using namespace std;
-
 int Sport::_sport_id=0;
 
 Sport::Sport(){

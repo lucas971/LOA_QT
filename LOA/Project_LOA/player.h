@@ -1,15 +1,14 @@
-#ifndef USER_HPP
-#define USER_HPP
-#include <string>
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
 
-using namespace std;
+#include <string>
 
 class Player
 {
    int _id;
    static int _player_id;
-   string _username;
-   string _email;
+   std::string _username;
+   std::string _email;
    float _weight;
    float _height;
    int _age;

@@ -2,8 +2,6 @@
 #include "player.h"
 #include <string>
 
-using namespace std;
-
 int Team::_team_id=0;
 
 Team::Team(){
@@ -15,7 +13,7 @@ Team::Team(){
     return;
 }
 
-Team::Team(int count, string name, string website, std::vector<Player> members){
+Team::Team(int count, std::string name, std::string website, std::vector<Player> members){
     _id=_team_id++;
     _count=count;
     _teamName=name;
