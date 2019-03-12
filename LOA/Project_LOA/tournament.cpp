@@ -15,7 +15,7 @@ Tournament::Tournament(){
     _roundCount = 1;
     _maxSub = 2;
     _sub = 2;
-    _teams = std::vector<Team>::empty();
+    _teams = std::vector<Team>();
     _tournamenttree = Tree();
     return;
 }
