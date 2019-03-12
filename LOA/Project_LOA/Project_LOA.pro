@@ -31,7 +31,8 @@ SOURCES += \
     tournamenttreemodel.cpp \
     team.cpp \
     treeitem.cpp \
-    treemodel.cpp
+    treemodel.cpp \
+    sport.cpp
 
 HEADERS += \
         mainwindow.h \
