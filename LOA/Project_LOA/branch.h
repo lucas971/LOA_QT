@@ -1,10 +1,7 @@
 #ifndef BRANCH_H
 #define BRANCH_H
 
-#include <string>
-#include <team.h>
-
-using namespace std;
+#include "team.h"
 
 class Branch
 {
