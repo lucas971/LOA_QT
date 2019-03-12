@@ -1,23 +1,27 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "ui_mainwindow.h"
+
 #include <QMainWindow>
+#include <QModelIndex>
 
-
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+class MainWindow : public QMainWindow, private Ui::MainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    MainWindow(QWidget *parent = 0);
 
-private:
-    Ui::MainWindow *ui;
+public slots:
+    void updateActions();
+
+private slots:
+    void insertChild();
+    bool insertColumn();
+    void insertRow();
+    bool removeColumn();
+    void removeRow();
 };
 
 #endif // MAINWINDOW_H

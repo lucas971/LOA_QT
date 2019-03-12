@@ -38,17 +38,21 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     player.h \
-    tournament.h \
     sport.h \
-    tree.h \
-    branch.h \
     team.h \
-    tournamentDelegate.h \
-    tournamentView.h \
-    delegate.h \
+    branch.h \
+    tree.h \
     treeitem.h \
     treemodel.h \
-    tree.h
+    tournament.h \
+    tournamentDelegate.h \
+    tournamentView.h \
+
+RESOURCES = \
+    editabletreemodel.qrc
 
 FORMS += \
-        mainwindow.ui
+    mainwindow.ui
+
+target.path = $$[QT_INSTALL_EXAMPLES]/widgets/itemviews/editabletreemodel
+INSTALLS += target
