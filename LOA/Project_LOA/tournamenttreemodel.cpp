@@ -1,4 +1,4 @@
-#include "tournamenttreemodel.h"
+#include "tournamentTreeModel.h"
 #include "player.h"
 
 TournamentTreeModel(){

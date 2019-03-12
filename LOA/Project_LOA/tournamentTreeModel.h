@@ -1,5 +1,5 @@
-#ifndef PLAYERTREEMODEL_H
-#define PLAYERTREEMODEL_H
+#ifndef TOURNAMENTTREEMODEL_H
+#define TOURNAMENTTREEMODEL_H
 #include <QStandardItemModel>
 #include <player.h>
 
@@ -9,8 +9,8 @@ class TournamentTreeModel : QStandardItemModel {
     TournamentTreeModel();
     TournamentTreeModel(const TournamentTreeModel &);
     ~TournamentTreeModel();
-    AddPlayer(Player player);
+    void AddPlayer(Player player);
 
-}
+};
 
 #endif // PLAYERTREEMODEL_H

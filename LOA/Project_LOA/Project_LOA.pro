@@ -34,13 +34,14 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     player.h \
-    tournamenttreemodel.h \
     tournament.h \
     sport.h \
     tree.h \
     branch.h \
     team.h \
-    delegate.h
+    tournamentTreeModel.h \
+    tournamentDelegate.h \
+    tournamentView.h
 
 FORMS += \
         mainwindow.ui
