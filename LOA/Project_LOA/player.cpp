@@ -10,7 +10,7 @@ Player::Player(){
     _username="";
     _email="";
     _weight=65;
-    _height=1.80f;
+    _height= 1.80f;
     _age=25;
     return;
 }

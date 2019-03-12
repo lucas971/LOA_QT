@@ -6,25 +6,23 @@
 #include <team.h>
 #include <vector>
 
-using namespace std;
-
 class Tournament
 {
    int _id;
    static int _tourn_id;
-   string _tournamentname;
+   std::string _tournamentname;
    Sport _sport;
-   string _password;
+   std::string _password;
    int _roundCount;
    int _maxSub;
    int _sub;
-   std::vector<Team> teams;
-   Tree tournamenttree;
+   std::vector<Team> _teams;
+   Tree _tournamenttree;
 
 public:
    Tournament();
-   Tournament(string name, Sport sport, string password, int roundCount, int maxSub, int sub, Team teams[], Tree tournamenttree);
-   Tournament(const Tournament &);
+   Tournament(std::string name, Sport sport, std::string password, int roundCount, int maxSub, int sub, std::vector<Team> teams, Tree tournamenttree);
+   Tournament(const Tournament & tournament);
    ~Tournament();
 
 };

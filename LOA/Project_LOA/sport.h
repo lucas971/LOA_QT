@@ -2,13 +2,11 @@
 #define SPORT_H
 #include <string>
 
-using namespace std;
-
 class Sport
 {
    int _id;
    static int _sport_id;
-   string _sportname;
+   std::string _sportname;
    bool _team;
    int _teamCount;
 
