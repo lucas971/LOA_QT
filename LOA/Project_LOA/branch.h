@@ -1,10 +1,7 @@
 #ifndef BRANCH_H
 #define BRANCH_H
 
-#include <string>
-#include <team.h>
-
-using namespace std;
+#include "team.h"
 
 class Branch
 {
@@ -17,7 +14,8 @@ class Branch
 
 public:
     Branch();
-    Branch(const Branch &);
+    Branch(Team team1, Team team2, bool finished, int win, int s1, int s2);
+    Branch(const Branch & branch);
     ~Branch();
 
 };

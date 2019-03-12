@@ -32,6 +32,7 @@ SOURCES += \
     treeitem.cpp \
     treemodel.cpp \
     sport.cpp \
+    branch.cpp
     tree.cpp
 
 HEADERS += \
