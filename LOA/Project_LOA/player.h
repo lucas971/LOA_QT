@@ -18,7 +18,7 @@ public:
    Player();
    Player(std::string username, std::string email);
    Player(std::string username, std::string email, float weight, float height, int age);
-   Player(const Player &);
+   Player(const Player & player);
    ~Player();
 
 };

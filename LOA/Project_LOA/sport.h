@@ -15,7 +15,7 @@ class Sport
 public:
    Sport();
    Sport(std::string sportname, bool team, int teamCount);
-   Sport(const Sport &);
+   Sport(const Sport & sport);
    ~Sport();
 
 };

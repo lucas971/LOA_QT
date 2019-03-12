@@ -19,7 +19,7 @@ class Team
 public:
     Team();
     Team(int count, string name, string website, std::vector<Player> members);
-    Team(const Team &);
+    Team(const Team & team);
     ~Team();
 };
 
