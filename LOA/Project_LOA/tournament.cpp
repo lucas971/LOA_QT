@@ -9,7 +9,7 @@ int Tournament::_tourn_id=0;
 
 Tournament::Tournament(){
     _id=_tourn_id++;
-    _tournamentname = "";
+    _tournamentname = "_";
     _sport = Sport();
     _password = "";
     _roundCount = 1;

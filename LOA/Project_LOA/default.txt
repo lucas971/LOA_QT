@@ -1,7 +1,12 @@
-A		Lettre		
-    1		Nombre	 
-    2		Nombre
-B		Lettre
-    1		Nombre
-C		Lettre
-D		Lettre
+Tournaments		           _
+    T1                             Tournament
+        Nom                        Name
+        Sport()                    Sport
+        1                          Rounds
+        2                          MaxSub
+        Teams                      _
+            Team1                  Team
+                Player1            Player
+            Team2                  Team
+                Player2            Player
+	

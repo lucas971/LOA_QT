@@ -1,8 +1,6 @@
 #include "player.h"
 #include <string>
 
-using namespace std;
-
 int Player::_player_id=0;
 
 Player::Player(){
@@ -10,19 +8,19 @@ Player::Player(){
     _username="";
     _email="";
     _weight=65;
-    _height= 1.80f;
+    _height= 1.80;
     _age=25;
     return;
 }
 
-Player::Player(std::string username, std::string email){
+Player::Player(QString username, QString email){
     _id=_player_id+1;
     _username=username;
     _email=email;
     return;
 }
 
-Player::Player(std::string username, std::string email, float weight, float height, int age){
+Player::Player(QString username, QString email, double weight, double height, int age){
     _id=_player_id++;
     _username=username;
     _email=email;

@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QFile file(":/default.txt");
     file.open(QIODevice::ReadOnly);
-    TreeModel *model = new TreeModel(headers, file.readAll());
+    TreeModel *model = new TreeModel(headers, tr(""));
     file.close();
 
     view->setModel(model);
@@ -26,16 +26,25 @@ MainWindow::MainWindow(QWidget *parent)
             this, &MainWindow::updateActions);
 
     connect(actionsMenu, &QMenu::aboutToShow, this, &MainWindow::updateActions);
-    connect(insertRowAction, &QAction::triggered, this, &MainWindow::insertRow);
-    connect(insertColumnAction, &QAction::triggered, this, &MainWindow::insertColumn);
     connect(removeRowAction, &QAction::triggered, this, &MainWindow::removeRow);
-    connect(removeColumnAction, &QAction::triggered, this, &MainWindow::removeColumn);
     connect(insertChildAction, &QAction::triggered, this, &MainWindow::insertChild);
 
     updateActions();
+    Player p = Player(tr("Lucas"), tr("lucas.rioust@gmail.com"), 75, 1.85, 21);
+    chosePlayer(p);
 }
 
 void MainWindow::insertChild()
+{
+    if (insertChildAction->text() == tr("Insert a new tournament")){
+        createNewTournament();
+    }
+    else if (insertChildAction->text() == tr("Insert a new player")){
+        createNewPlayer();
+    }
+}
+
+void MainWindow::on_Valider_clicked() //CREATION DE JOUEUR
 {
     QModelIndex index = view->selectionModel()->currentIndex();
     QAbstractItemModel *model = view->model();
@@ -54,28 +63,18 @@ void MainWindow::insertChild()
         if (!model->headerData(column, Qt::Horizontal).isValid())
             model->setHeaderData(column, Qt::Horizontal, QVariant("[No header]"), Qt::EditRole);
     }
+    QModelIndex child = model->index(0, 0, index);
+    model->setData(child, userNameLineEdit->text(), Qt::EditRole);
+    child = model->index(0, 1, index);
+    model->setData(child, tr("Player"), Qt::EditRole);
 
     view->selectionModel()->setCurrentIndex(model->index(0, 0, index),
                                             QItemSelectionModel::ClearAndSelect);
     updateActions();
 }
 
-bool MainWindow::insertColumn()
-{
-    QAbstractItemModel *model = view->model();
-    int column = view->selectionModel()->currentIndex().column();
 
-    // Insert a column in the parent item.
-    bool changed = model->insertColumn(column + 1);
-    if (changed)
-        model->setHeaderData(column + 1, Qt::Horizontal, QVariant("[No header]"), Qt::EditRole);
-
-    updateActions();
-
-    return changed;
-}
-
-void MainWindow::insertRow()
+void MainWindow::on_Valider_2_clicked() //CREATION DE TOURNOI
 {
     QModelIndex index = view->selectionModel()->currentIndex();
     QAbstractItemModel *model = view->model();
@@ -85,25 +84,12 @@ void MainWindow::insertRow()
 
     updateActions();
 
-    for (int column = 0; column < model->columnCount(index.parent()); ++column) {
-        QModelIndex child = model->index(index.row()+1, column, index.parent());
-        model->setData(child, QVariant("[No data]"), Qt::EditRole);
-    }
+    QModelIndex child = model->index(index.row()+1, 0, index.parent());
+    model->setData(child, QVariant(nameLineEdit->text()), Qt::EditRole);
+    child = model->index(index.row()+1, 1, index.parent());
+    model->setData(child, QVariant("Tournament"), Qt::EditRole);
 }
 
-bool MainWindow::removeColumn()
-{
-    QAbstractItemModel *model = view->model();
-    int column = view->selectionModel()->currentIndex().column();
-
-    // Insert columns in each child of the parent item.
-    bool changed = model->removeColumn(column);
-
-    if (changed)
-        updateActions();
-
-    return changed;
-}
 
 void MainWindow::removeRow()
 {
@@ -117,20 +103,55 @@ void MainWindow::updateActions()
 {
     bool hasSelection = !view->selectionModel()->selection().isEmpty();
     removeRowAction->setEnabled(hasSelection);
-    removeColumnAction->setEnabled(hasSelection);
 
     bool hasCurrent = view->selectionModel()->currentIndex().isValid();
-    insertRowAction->setEnabled(hasCurrent);
-    insertColumnAction->setEnabled(hasCurrent);
 
     if (hasCurrent) {
+        setInsertChildName(tr("new player"));
         view->closePersistentEditor(view->selectionModel()->currentIndex());
 
         int row = view->selectionModel()->currentIndex().row();
         int column = view->selectionModel()->currentIndex().column();
+
         if (view->selectionModel()->currentIndex().parent().isValid())
             statusBar()->showMessage(tr("Position: (%1,%2)").arg(row).arg(column));
         else
             statusBar()->showMessage(tr("Position: (%1,%2) in top level").arg(row).arg(column));
     }
+
+    else{
+        setInsertChildName(tr("new tournament"));
+
+    }
 }
+
+void MainWindow::setInsertChildName(QString typeToInsert){
+    insertChildAction->setText(tr("Insert a ").append(typeToInsert));
+}
+
+void MainWindow::chosePlayer(Player player){
+    ageSpinBox->setValue(player._age);
+    heightDoubleSpinBox->setValue(player._height);
+    weightDoubleSpinBox->setValue(player._weight);
+    userNameLineEdit->setText(player._username);
+    mailLineEdit->setText(player._email);
+    stackedWidget->setCurrentIndex(0);
+}
+void MainWindow::createNewPlayer(){
+    ageSpinBox->setValue(0);
+    heightDoubleSpinBox->setValue(0);
+    weightDoubleSpinBox->setValue(0);
+    userNameLineEdit->setText(tr(""));
+    mailLineEdit->setText(tr(""));
+    stackedWidget->setCurrentIndex(0);
+}
+
+void MainWindow::createNewTournament(){
+    nameLineEdit->setText(tr(""));
+    numberOfTeamsSpinBox->setValue(2);
+    numberOfRoundsSpinBox->setValue(1);
+    sportLineEdit->setText(tr(""));
+    stackedWidget->setCurrentIndex(1);
+}
+
+

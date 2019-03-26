@@ -2,23 +2,24 @@
 #define PLAYER_HPP
 
 #include <string>
-
+#include <QString>
 class Player
 {
    int _id;
    static int _player_id;
-   std::string _username;
-   std::string _email;
-   float _weight;
-   float _height;
-   int _age;
 
 public:
    Player();
-   Player(std::string username, std::string email);
-   Player(std::string username, std::string email, float weight, float height, int age);
+   Player(QString username, QString email);
+   Player(QString username, QString email, double weight, double height, int age);
    Player(const Player & player);
    ~Player();
+   QString _username;
+   QString _email;
+   double _weight;
+   double _height;
+   int _age;
+
 
 };
 

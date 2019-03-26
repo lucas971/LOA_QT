@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>706</width>
+    <width>759</width>
     <height>468</height>
    </rect>
   </property>
@@ -14,77 +14,212 @@
    <string>Editable Tree Model</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>0</y>
-      <width>441</width>
-      <height>411</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>256</width>
-      <height>0</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QTreeView" name="view">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>40</y>
-      <width>271</width>
-      <height>371</height>
-     </rect>
-    </property>
-    <property name="alternatingRowColors">
-     <bool>true</bool>
-    </property>
-    <property name="selectionBehavior">
-     <enum>QAbstractItemView::SelectItems</enum>
-    </property>
-    <property name="horizontalScrollMode">
-     <enum>QAbstractItemView::ScrollPerPixel</enum>
-    </property>
-    <property name="animated">
-     <bool>false</bool>
-    </property>
-    <property name="allColumnsShowFocus">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>6</y>
-      <width>151</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>4</x>
-      <y>15</y>
-      <width>101</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Recherche :</string>
-    </property>
-   </widget>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <layout class="QVBoxLayout" name="LeftPart">
+      <item>
+       <layout class="QHBoxLayout" name="ResearchField">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Recherche :</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEdit"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QTreeView" name="view">
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectItems</enum>
+        </property>
+        <property name="horizontalScrollMode">
+         <enum>QAbstractItemView::ScrollPerPixel</enum>
+        </property>
+        <property name="animated">
+         <bool>false</bool>
+        </property>
+        <property name="allColumnsShowFocus">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="player">
+       <widget class="QWidget" name="verticalLayoutWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>2</x>
+          <y>6</y>
+          <width>361</width>
+          <height>381</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="playerForm">
+         <item>
+          <layout class="QFormLayout" name="form">
+           <item row="0" column="0">
+            <widget class="QLabel" name="userNameLabel">
+             <property name="text">
+              <string>UserName</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="userNameLineEdit"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="heightLabel">
+             <property name="text">
+              <string>Height (m)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QDoubleSpinBox" name="heightDoubleSpinBox"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="weightLabel">
+             <property name="text">
+              <string>Weight (kg)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QDoubleSpinBox" name="weightDoubleSpinBox"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="mailLabel">
+             <property name="text">
+              <string>Mail</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="mailLineEdit"/>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="ageLabel">
+             <property name="text">
+              <string>Age</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QSpinBox" name="ageSpinBox"/>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Valider">
+           <property name="text">
+            <string>Send</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tournament">
+       <widget class="QWidget" name="verticalLayoutWidget_3">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>351</width>
+          <height>361</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="tournamentForm">
+         <item>
+          <layout class="QFormLayout" name="form_2">
+           <item row="0" column="0">
+            <widget class="QLabel" name="nameLabel">
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="nameLineEdit"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="numberOfTeamsLabel">
+             <property name="text">
+              <string>Number of teams</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QSpinBox" name="numberOfTeamsSpinBox"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="numberOfRoundsLabel">
+             <property name="text">
+              <string>Number of rounds</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QSpinBox" name="numberOfRoundsSpinBox"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="sportLabel">
+             <property name="text">
+              <string>Sport</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="sportLineEdit"/>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Valider_2">
+           <property name="text">
+            <string>Send</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tournamentTree">
+       <widget class="QGraphicsView" name="graphicsView">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>31</y>
+          <width>351</width>
+          <height>361</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="sport"/>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>706</width>
+     <width>759</width>
      <height>26</height>
     </rect>
    </property>
@@ -98,11 +233,8 @@
     <property name="title">
      <string>&amp;Actions</string>
     </property>
-    <addaction name="insertRowAction"/>
-    <addaction name="insertColumnAction"/>
     <addaction name="separator"/>
     <addaction name="removeRowAction"/>
-    <addaction name="removeColumnAction"/>
     <addaction name="separator"/>
     <addaction name="insertChildAction"/>
    </widget>
@@ -118,36 +250,12 @@
     <string>Ctrl+Q</string>
    </property>
   </action>
-  <action name="insertRowAction">
-   <property name="text">
-    <string>Insert Row</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+I, R</string>
-   </property>
-  </action>
   <action name="removeRowAction">
    <property name="text">
     <string>Remove Row</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+R, R</string>
-   </property>
-  </action>
-  <action name="insertColumnAction">
-   <property name="text">
-    <string>Insert Column</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+I, C</string>
-   </property>
-  </action>
-  <action name="removeColumnAction">
-   <property name="text">
-    <string>Remove Column</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+R, C</string>
    </property>
   </action>
   <action name="insertChildAction">
