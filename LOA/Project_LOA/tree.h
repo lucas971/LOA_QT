@@ -3,18 +3,19 @@
 
 #include <string>
 #include <branch.h>
-#include <vector>
+#include <QVector>
 
 using namespace std;
 
 class Tree
 {
-    int height;
-    int width;
-    std::vector<Branch> branches;
+    int _height;
+    int _width;
+    QVector<Branch> _branches;
 
 public:
    Tree();
+   Tree(int h, int w, QVector<Branch> branches);
    Tree(const Tree &);
    ~Tree();
 

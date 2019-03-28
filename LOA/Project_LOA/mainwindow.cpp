@@ -2,6 +2,7 @@
 #include "treemodel.h"
 
 #include <QFile>
+#include <QTextStream>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

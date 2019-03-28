@@ -3,21 +3,20 @@
 #include <string>
 #include <player.h>
 #include <vector>
-
+#include <QVector>
 
 class Team
 {
+public:
     int _id;
     static int _team_id;
     int _count;
-    std::string _teamName;
-    std::string _website;
-    std::vector<Player> _members;
+    QString _teamName;
+    QString _website;
+    QVector<Player> _members;
 
-
-public:
     Team();
-    Team(int count, std::string name, std::string website, std::vector<Player> members);
+    Team(int count, QString name, QString website, QVector<Player> members);
     Team(const Team & team);
     ~Team();
 };

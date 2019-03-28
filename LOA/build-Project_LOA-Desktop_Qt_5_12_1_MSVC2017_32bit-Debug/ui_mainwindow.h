@@ -34,6 +34,9 @@ public:
     QAction *insertColumnAction;
     QAction *removeColumnAction;
     QAction *insertChildAction;
+    QAction *actionAjouter_un_joueur;
+    QAction *actionCr_er_une_quipe;
+    QAction *actionCr_er_un_tournoi;
     QWidget *centralwidget;
     QGraphicsView *graphicsView;
     QTreeView *view;
@@ -42,6 +45,7 @@ public:
     QMenuBar *menubar;
     QMenu *fileMenu;
     QMenu *actionsMenu;
+    QMenu *menuInscription;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -61,6 +65,12 @@ public:
         removeColumnAction->setObjectName(QString::fromUtf8("removeColumnAction"));
         insertChildAction = new QAction(MainWindow);
         insertChildAction->setObjectName(QString::fromUtf8("insertChildAction"));
+        actionAjouter_un_joueur = new QAction(MainWindow);
+        actionAjouter_un_joueur->setObjectName(QString::fromUtf8("actionAjouter_un_joueur"));
+        actionCr_er_une_quipe = new QAction(MainWindow);
+        actionCr_er_une_quipe->setObjectName(QString::fromUtf8("actionCr_er_une_quipe"));
+        actionCr_er_un_tournoi = new QAction(MainWindow);
+        actionCr_er_un_tournoi->setObjectName(QString::fromUtf8("actionCr_er_un_tournoi"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         graphicsView = new QGraphicsView(centralwidget);
@@ -89,6 +99,8 @@ public:
         fileMenu->setObjectName(QString::fromUtf8("fileMenu"));
         actionsMenu = new QMenu(menubar);
         actionsMenu->setObjectName(QString::fromUtf8("actionsMenu"));
+        menuInscription = new QMenu(menubar);
+        menuInscription->setObjectName(QString::fromUtf8("menuInscription"));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -96,6 +108,7 @@ public:
 
         menubar->addAction(fileMenu->menuAction());
         menubar->addAction(actionsMenu->menuAction());
+        menubar->addAction(menuInscription->menuAction());
         fileMenu->addAction(exitAction);
         actionsMenu->addAction(insertRowAction);
         actionsMenu->addAction(insertColumnAction);
@@ -104,6 +117,9 @@ public:
         actionsMenu->addAction(removeColumnAction);
         actionsMenu->addSeparator();
         actionsMenu->addAction(insertChildAction);
+        menuInscription->addAction(actionAjouter_un_joueur);
+        menuInscription->addAction(actionCr_er_une_quipe);
+        menuInscription->addAction(actionCr_er_un_tournoi);
 
         retranslateUi(MainWindow);
 
@@ -137,9 +153,13 @@ public:
 #ifndef QT_NO_SHORTCUT
         insertChildAction->setShortcut(QApplication::translate("MainWindow", "Ctrl+N", nullptr));
 #endif // QT_NO_SHORTCUT
+        actionAjouter_un_joueur->setText(QApplication::translate("MainWindow", "Ajouter un joueur", nullptr));
+        actionCr_er_une_quipe->setText(QApplication::translate("MainWindow", "Cr\303\251er une \303\251quipe", nullptr));
+        actionCr_er_un_tournoi->setText(QApplication::translate("MainWindow", "Cr\303\251er un tournoi", nullptr));
         label->setText(QApplication::translate("MainWindow", "Recherche :", nullptr));
         fileMenu->setTitle(QApplication::translate("MainWindow", "&File", nullptr));
         actionsMenu->setTitle(QApplication::translate("MainWindow", "&Actions", nullptr));
+        menuInscription->setTitle(QApplication::translate("MainWindow", "Inscription", nullptr));
     } // retranslateUi
 
 };

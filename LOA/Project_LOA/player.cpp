@@ -1,5 +1,7 @@
 #include "player.h"
 #include <string>
+#include <QFile>
+#include <QString>
 
 int Player::_player_id=0;
 
@@ -41,5 +43,16 @@ Player::Player(const Player & player){
 
 Player::~Player(){
 
+}
+
+Player Player::playerFromFile(QString file_name){
+    QFile file(file_name);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return Player();
+
+    while (!file.atEnd()) {
+        QByteArray line = file.readLine();
+        //process_line(line);
+    }
 }
 

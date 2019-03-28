@@ -11,7 +11,7 @@ Sport::Sport(){
     return;
 }
 
-Sport::Sport(std::string sportname, bool team, int teamCount){
+Sport::Sport(QString sportname, bool team, int teamCount){
     _id=_sport_id++;
     _sportname = sportname;
     _team = team;

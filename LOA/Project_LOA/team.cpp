@@ -13,7 +13,7 @@ Team::Team(){
     return;
 }
 
-Team::Team(int count, std::string name, std::string website, std::vector<Player> members){
+Team::Team(int count, QString name, QString website, QVector<Player> members){
     _id=_team_id++;
     _count=count;
     _teamName=name;

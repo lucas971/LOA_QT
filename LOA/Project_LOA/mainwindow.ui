@@ -238,8 +238,17 @@
     <addaction name="separator"/>
     <addaction name="insertChildAction"/>
    </widget>
+   <widget class="QMenu" name="menuInscription">
+    <property name="title">
+     <string>Inscription</string>
+    </property>
+    <addaction name="actionAjouter_un_joueur"/>
+    <addaction name="actionCr_er_une_quipe"/>
+    <addaction name="actionCr_er_un_tournoi"/>
+   </widget>
    <addaction name="fileMenu"/>
    <addaction name="actionsMenu"/>
+   <addaction name="menuInscription"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="exitAction">
@@ -264,6 +273,21 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionAjouter_un_joueur">
+   <property name="text">
+    <string>Ajouter un joueur</string>
+   </property>
+  </action>
+  <action name="actionCr_er_une_quipe">
+   <property name="text">
+    <string>Créer une équipe</string>
+   </property>
+  </action>
+  <action name="actionCr_er_un_tournoi">
+   <property name="text">
+    <string>Créer un tournoi</string>
    </property>
   </action>
  </widget>

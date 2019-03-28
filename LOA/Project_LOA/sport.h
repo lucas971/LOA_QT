@@ -1,18 +1,19 @@
 #ifndef SPORT_H
 #define SPORT_H
-#include <string>
+#include <QString>
 
 class Sport
 {
+public:
+
    int _id;
    static int _sport_id;
-   std::string _sportname;
+   QString _sportname;
    bool _team;
    int _teamCount;
 
-public:
    Sport();
-   Sport(std::string sportname, bool team, int teamCount);
+   Sport(QString sportname, bool team, int teamCount);
    Sport(const Sport & sport);
    ~Sport();
 
