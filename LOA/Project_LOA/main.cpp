@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     Tree* tournament_tree;
     Sport* sport1;
 
-    sport1 = new Sport("footbal_en_solo", true, 2);
+    sport1 = new Sport("footbal_en_solo");
 
     Player* p1;
     Player* p2;
@@ -57,10 +57,10 @@ int main(int argc, char *argv[])
 
     QVector<Team> teams;
 
-    team1 = new Team(1, "la_team_1", "website", members);
-    team2 = new Team(1, "la_team_2", "website", members2);
-    team3 = new Team(1, "la_team_3", "website", members3);
-    team4 = new Team(1, "la_team_4", "website", members4);
+    team1 = new Team(1, "la_team_1", "website");
+    team2 = new Team(1, "la_team_2", "website");
+    team3 = new Team(1, "la_team_3", "website");
+    team4 = new Team(1, "la_team_4", "website");
 
     teams.push_back(*team1);
     teams.push_back(*team2);
@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
     branch.push_back(*branch3);
 
     //tournament_tree = Tree(2, 3, branch);
-    t = new Tournament("tounoi 1", *sport1, "1234", 3, 10, 4, teams);
+    t = new Tournament("tounoi 1", sport1->_sportname, "1234", 3, 10);
     //, tournament_tree);
 
     t->writefile3(*t, "out.json");
