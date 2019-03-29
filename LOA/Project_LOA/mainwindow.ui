@@ -55,7 +55,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="player">
        <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -185,6 +185,16 @@
            <item row="3" column="1">
             <widget class="QLineEdit" name="sportLineEdit"/>
            </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="maxEntriesLabel">
+             <property name="text">
+              <string>MaxEntries</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QSpinBox" name="maxEntriesSpinBox"/>
+           </item>
           </layout>
          </item>
          <item>
@@ -253,22 +263,12 @@
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>Number max of players :</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLCDNumber" name="NumberMaxOfPlayers"/>
-           </item>
-          </layout>
+          <layout class="QHBoxLayout" name="horizontalLayout"/>
          </item>
         </layout>
        </widget>
       </widget>
+      <widget class="QWidget" name="nothing"/>
      </widget>
     </item>
    </layout>
@@ -295,14 +295,11 @@
     <addaction name="separator"/>
     <addaction name="removeRowAction"/>
     <addaction name="separator"/>
-    <addaction name="insertChildAction"/>
    </widget>
    <widget class="QMenu" name="menuInscription">
     <property name="title">
      <string>Inscription</string>
     </property>
-    <addaction name="actionAjouter_un_joueur"/>
-    <addaction name="actionCr_er_une_quipe"/>
     <addaction name="actionCr_er_un_tournoi"/>
    </widget>
    <addaction name="fileMenu"/>

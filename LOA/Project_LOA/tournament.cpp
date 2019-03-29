@@ -20,11 +20,14 @@ Tournament::Tournament(){
     _roundCount = 1;
     _maxSub = 2;
     _sub = 2;
-    //_tournamenttree = Tree();
+    _teamsSize = 2;
+    _tournamenttree = new Tree(_maxSub);
+    _teams = new QVector<Team>(_maxSub);
+
 }
 
 
-Tournament::Tournament(QString name, QString sport, QString password, int roundCount, int maxSub){
+Tournament::Tournament(QString name, QString sport, QString password, int roundCount, int maxSub, int teamsSize){
     _id=_tourn_id++;
     _tournamentname = name;
     _sport = sport;
@@ -34,6 +37,7 @@ Tournament::Tournament(QString name, QString sport, QString password, int roundC
     _sub = 0;
     _tournamenttree = new Tree(maxSub);
     _teams = new QVector<Team>(maxSub);
+    _teamsSize = teamsSize;
     return;
 }
 
@@ -47,6 +51,7 @@ Tournament::Tournament(const Tournament & tournament){
     _sub = tournament._sub;
     _teams = tournament._teams;
     _tournamenttree = tournament._tournamenttree;
+    _teamsSize = tournament._teamsSize;
 }
 
 Tournament::~Tournament(){

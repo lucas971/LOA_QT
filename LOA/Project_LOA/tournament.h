@@ -10,12 +10,12 @@
 
 class Tournament
 {
-public:
-   int _id;
+private:
    static int _tourn_id;
    QString _password;
 
 public:
+   int _id;
    QString _tournamentname;
    QString _sport;
    int _maxSub;
@@ -23,8 +23,9 @@ public:
    int _sub;
    Tree* _tournamenttree;
    QVector<Team>* _teams;
+   int _teamsSize;
    Tournament();
-   Tournament(QString name, QString sport, QString password, int roundCount, int maxSub);
+   Tournament(QString name, QString sport, QString password, int roundCount, int maxSub, int teamsSize);
    Tournament(const Tournament & tournament);
    ~Tournament();
    QJsonDocument loadJson(QString fileName);

@@ -2,16 +2,17 @@
 #include "treemodel.h"
 #include "tournament.h"
 #include "sport.h"
+#include "database.h"
 #include <QFile>
 #include <QTextStream>
-
+#include <QDebug>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     setupUi(this);
 
     QStringList headers;
-    headers << tr("Nom") << tr("Type");
+    headers << tr("Nom") << tr("Type") << tr("Id");
 
     QFile file(":/default.txt");
     file.open(QIODevice::ReadOnly);
@@ -32,25 +33,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(insertChildAction, &QAction::triggered, this, &MainWindow::insertChild);
 
     updateActions();
+    _db = new Database();
 }
 
 void MainWindow::insertChild()
 {
-    if (insertChildAction->text() == tr("Insert a new tournament")){
-        insertChildAction->setEnabled(true);
-        createNewTournament();
-    }
-    else if (insertChildAction->text() == tr("Insert a new player")){
-        insertChildAction->setEnabled(true);
-        createNewPlayer();
-    }
-    else if (insertChildAction->text() == tr("Insert a new team")){
-        insertChildAction->setEnabled(true);
-        createNewPlayer();
-    }
-    else{
-        insertChildAction->setEnabled(false);
-    }
 }
 
 void MainWindow::on_Valider_clicked() //CREATION DE JOUEUR
@@ -58,7 +45,7 @@ void MainWindow::on_Valider_clicked() //CREATION DE JOUEUR
 
 }
 
-void MainWindow::createChild(QString name, QString type, QMap<int, QVariant> map = QMap<int, QVariant>()){
+void MainWindow::createChild(QString name, QString type, int id = -1, QMap<int, QVariant> map = QMap<int, QVariant>()){
     QModelIndex index = view->selectionModel()->currentIndex();
     QAbstractItemModel *model = view->model();
 
@@ -69,17 +56,21 @@ void MainWindow::createChild(QString name, QString type, QMap<int, QVariant> map
 
     if (!model->insertRow(0, index))
         return;
-
+/*
     for (int column = 0; column < model->columnCount(index); ++column) {
         QModelIndex child = model->index(0, column, index);
         model->setData(child, QVariant("[No data]"), Qt::EditRole);
         if (!model->headerData(column, Qt::Horizontal).isValid())
             model->setHeaderData(column, Qt::Horizontal, QVariant("[No header]"), Qt::EditRole);
-    }
+    }*/
     QModelIndex child = model->index(0, 0, index);
     model->setData(child, name, Qt::EditRole);
     child = model->index(0, 1, index);
     model->setData(child, type, Qt::EditRole);
+    if (id!=-1){
+        child = model->index(0, 2, index);
+        model->setData(child, id, Qt::EditRole);
+    }
 
     if (!map.isEmpty()){
         model->setItemData(index,map);
@@ -91,7 +82,9 @@ void MainWindow::createChild(QString name, QString type, QMap<int, QVariant> map
 
 void MainWindow::on_Valider_2_clicked() //CREATION DE TOURNOI
 {
-    Tournament* t = new Tournament(nameLineEdit->text(), sportLineEdit->text(), nameLineEdit->text(), numberOfRoundsSpinBox->value(), numberOfTeamsSpinBox->value());
+    Tournament* t = new Tournament(nameLineEdit->text(), sportLineEdit->text(), nameLineEdit->text(), numberOfRoundsSpinBox->value(), numberOfTeamsSpinBox->value() ,maxEntriesSpinBox->value());
+
+    _db->tournaments.insert(t->_id, *t);
     QModelIndex index = view->selectionModel()->currentIndex();
     QAbstractItemModel *model = view->model();
 
@@ -101,15 +94,13 @@ void MainWindow::on_Valider_2_clicked() //CREATION DE TOURNOI
     updateActions();
 
     QModelIndex child = model->index(index.row()+1, 0, index.parent());
-    model->setData(child, QVariant(nameLineEdit->text()), Qt::EditRole);
+    model->setData(child, QVariant(t->_tournamentname), Qt::EditRole);
 
     child = model->index(index.row()+1, 1, index.parent());
-    model->setData(child, tr("Tournament of ").append(sportLineEdit->text()), Qt::EditRole);
+    model->setData(child, tr("Tournament of ").append(t->_sport), Qt::EditRole);
 
-    QMap<int, QVariant> map;
-    map.insert(0, (t->_maxSub));
-    model->setItemData(index,map);
-
+    child = model->index(index.row()+1, 2, index.parent());
+    model->setData(child, t->_id, Qt::EditRole);
 
     view->selectionModel()->setCurrentIndex(model->index(0, 0, index),
                                             QItemSelectionModel::ClearAndSelect);
@@ -151,12 +142,21 @@ void MainWindow::updateActions()
         QAbstractItemModel *model = view->model();
 
         if (model->data((index)).toString() == "Teams"){
-            insertChildAction->setText(tr("Insert a new Team"));
+            createNewTeam();
+        }
+        qDebug() << model->index(index.row(),1, index.parent()).data();
+        if (model->index(index.row(),1, index.parent()).data().toString() == "Player"){
+            createNewPlayer();
+        }
+        else{
+            insertChildAction->setText(tr(""));
+            showNothing();
         }
     }
 
     else{
-        insertChildAction->setText(tr("Insert a new Tournament"));
+        insertChildAction->setText(tr("Insert a new tournament"));
+        createNewTournament();
 
     }
 }
@@ -186,23 +186,36 @@ void MainWindow::createNewTournament(){
     nameLineEdit->setText(tr(""));
     numberOfTeamsSpinBox->setValue(2);
     numberOfRoundsSpinBox->setValue(1);
+    maxEntriesSpinBox->setValue(4);
     sportLineEdit->setText(tr(""));
+
+
     stackedWidget->setCurrentIndex(1);
+
 }
 
+void MainWindow::createNewTeam(){
+    teamNameLineEdit->setText(tr(""));
+    websiteLineEdit->setText(tr(""));
+    stackedWidget->setCurrentIndex(4);
+}
 
-
+void MainWindow::showNothing(){
+    stackedWidget->setCurrentIndex(6);
+}
 void MainWindow::on_pushButton_clicked()
 {
     QModelIndex index = view->selectionModel()->currentIndex();
     QAbstractItemModel *model = view->model();
-    Team * t = new Team(model->itemData(index.parent()).first().toInt(), teamNameLineEdit->text(), websiteLineEdit->text());
-    view->selectionModel()->setCurrentIndex(model->index(0, 0, index),
-                                            QItemSelectionModel::ClearAndSelect);
+    Team * t = new Team(_db->tournaments.find(model->data(model->index(index.parent().row(),2)).toInt()).value()._teamsSize, teamNameLineEdit->text(), websiteLineEdit->text());
+    _db->teams.insert(t->_id, *t);
+    createChild(t->_teamName, tr("Team"), t->_id);
+    view->selectionModel()->setCurrentIndex(index.child(0,0), QItemSelectionModel::ClearAndSelect);
     for (int i = 0; i < t->_count; i++){
-        Player * p = new Player(tr("player").append(QString::number(i)), tr(""));
-        QMap<int, QVariant> map = QMap<int, QVariant>();
-        map.insert(0, p->_id);
-        createChild(p->_username, tr("Player"), map);
+
+        Player * p = new Player(tr("Unnamed player"), tr(""));
+        _db->players.insert(p->_id,*p);
+        createChild(p->_username, tr("Player"), p->_id);
     }
+    updateActions();
 }

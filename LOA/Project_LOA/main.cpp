@@ -13,7 +13,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVector>
-
 #include "mainwindow.h"
 
 int main(int argc, char *argv[])
@@ -23,6 +22,9 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     MainWindow window;
     window.show();
+    return app.exec();
+}
+    /*
 
     Tournament* t;
     Team* team1;
@@ -86,4 +88,4 @@ int main(int argc, char *argv[])
 
     t->writefile3(*t, "out.json");
     return app.exec();
-}
+}*/
