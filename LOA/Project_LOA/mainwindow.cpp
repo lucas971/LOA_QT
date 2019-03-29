@@ -157,15 +157,12 @@ void MainWindow::updateActions()
             editTeam(model->index(index.row(),2, index.parent()).data().toInt());
         }
         else{
-            insertChildAction->setText(tr(""));
             showNothing();
         }
     }
 
     else{
-        insertChildAction->setText(tr("Insert a new tournament"));
         createNewTournament();
-
     }
 }
 
