@@ -192,6 +192,7 @@ void MainWindow::editPlayer(int id){
 }
 
 void MainWindow::createNewTournament(){
+    view->selectionModel()->clear();
     nameLineEdit->setText(tr(""));
     numberOfTeamsSpinBox->setValue(2);
     numberOfRoundsSpinBox->setValue(1);
@@ -257,4 +258,9 @@ void MainWindow::on_pushButton_3_clicked()
     Tournament *t = &_db->tournaments.find(model->data(model->index(index.row(),2, index.parent())).toInt()).value();
     t->_tournamentname = editNameLineEdit->text();
     model->setData(model->index(index.row(),0,index.parent()), t->_tournamentname, Qt::EditRole);
+}
+
+void MainWindow::on_actionCr_er_un_tournoi_triggered()
+{
+    createNewTournament();
 }

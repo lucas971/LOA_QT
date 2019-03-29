@@ -36,6 +36,7 @@ private slots:
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
     void on_pushButton_3_clicked();
+    void on_actionCr_er_un_tournoi_triggered();
 };
 
 #endif // MAINWINDOW_H
