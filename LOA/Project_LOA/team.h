@@ -16,7 +16,7 @@ public:
     int _count;
     QString _teamName;
     QString _website;
-    QVector<Player> _members;
+    QVector<Player> * _members;
 
     Team();
     Team(int count, QString name, QString website);

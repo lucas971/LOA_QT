@@ -9,6 +9,7 @@ Tree::Tree(int h, int w)
 {
     _height = h;
     _width = w;
+    _branches = new QVector<Branch>();
 }
 
 Tree::Tree(const Tree& tree)

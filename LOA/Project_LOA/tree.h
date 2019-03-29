@@ -10,7 +10,7 @@ class Tree
 public:
    int _height;
    int _width;
-   QVector<Branch> _branches;
+   QVector<Branch> * _branches;
    Tree();
    Tree(int h, int w);
    Tree(const Tree &);

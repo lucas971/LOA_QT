@@ -17,6 +17,7 @@ Team::Team(int count, QString name, QString website){
     _count=count;
     _teamName=name;
     _website=website;
+    _members=new QVector<Player>(count);
     return;
 }
 
