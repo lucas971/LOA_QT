@@ -11,8 +11,6 @@
 class Tournament
 {
 public:
-
-
    int _id;
    static int _tourn_id;
    QString _password;
