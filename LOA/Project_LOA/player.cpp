@@ -16,7 +16,7 @@ Player::Player(){
 }
 
 Player::Player(QString username, QString email){
-    _id=_player_id+1;
+    _id=_player_id++;
     _username=username;
     _email=email;
     return;
@@ -33,7 +33,7 @@ Player::Player(QString username, QString email, double weight, double height, in
 }
 
 Player::Player(const Player & player){
-    _id=_player_id++;
+    _id=_player_id;
     _username=player._username;
     _email=player._email;
     _weight=player._weight;

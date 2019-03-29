@@ -22,7 +22,6 @@ private slots:
     void createChild(QString name, QString type, int id, QMap<int, QVariant> map);
     void insertChild();
     void removeRow();
-    void setInsertChildName(QString typeToInsert);
     void showNothing();
     void chosePlayer(Player player);
     void editPlayer(int id);

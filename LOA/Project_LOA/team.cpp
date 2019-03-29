@@ -22,7 +22,7 @@ Team::Team(int count, QString name, QString website){
 }
 
 Team::Team(const Team & team){
-    _id=_team_id++;
+    _id=team._id;
     _count=team._count;
     _teamName=team._teamName;
     _website=team._website;
@@ -31,5 +31,4 @@ Team::Team(const Team & team){
 }
 
 Team::~Team(){
-
 }

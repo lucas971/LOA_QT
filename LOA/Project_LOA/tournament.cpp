@@ -21,7 +21,6 @@ Tournament::Tournament(){
     _maxSub = 2;
     _sub = 2;
     _teamsSize = 2;
-    _tournamenttree = new Tree(_maxSub);
     _teams = new QVector<Team>(_maxSub);
 
 }
@@ -35,14 +34,13 @@ Tournament::Tournament(QString name, QString sport, QString password, int roundC
     _roundCount = roundCount;
     _maxSub = maxSub;
     _sub = 0;
-    _tournamenttree = new Tree(maxSub);
     _teams = new QVector<Team>(maxSub);
     _teamsSize = teamsSize;
     return;
 }
 
 Tournament::Tournament(const Tournament & tournament){
-    _id=_tourn_id++;
+    _id=tournament._id;
     _tournamentname = tournament._tournamentname;
     _sport = tournament._sport;
     _password = tournament._password;
@@ -50,12 +48,10 @@ Tournament::Tournament(const Tournament & tournament){
     _maxSub = tournament._maxSub;
     _sub = tournament._sub;
     _teams = tournament._teams;
-    _tournamenttree = tournament._tournamenttree;
     _teamsSize = tournament._teamsSize;
 }
 
 Tournament::~Tournament(){
-    delete this;
 }
 QJsonDocument loadJson(QString fileName) {
     QFile jsonFile(fileName);
@@ -69,8 +65,9 @@ void saveJson(QJsonDocument document, QString fileName) {
     jsonFile.write(document.toJson());
 }
 
-void Tournament::writefile3(Tournament t, QString fileName){
 
+void Tournament::writefile3(Tournament t, QString fileName){
+/*
     QJsonObject tournamentObject;
     tournamentObject.insert("Tournament name", QJsonValue::fromVariant(t._tournamentname));
 
@@ -173,7 +170,7 @@ void Tournament::writefile3(Tournament t, QString fileName){
     QFile jsonFile(fileName);
     jsonFile.open(QFile::WriteOnly);
     jsonFile.write(doc.toJson());
-
+*/
 }
 /*
     QJsonObject recordObject;

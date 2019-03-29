@@ -21,7 +21,6 @@ public:
    int _maxSub;
    int _roundCount;
    int _sub;
-   Tree* _tournamenttree;
    QVector<Team>* _teams;
    int _teamsSize;
    Tournament();

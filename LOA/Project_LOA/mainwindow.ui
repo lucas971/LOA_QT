@@ -18,18 +18,7 @@
     <item>
      <layout class="QVBoxLayout" name="LeftPart">
       <item>
-       <layout class="QHBoxLayout" name="ResearchField">
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Recherche :</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lineEdit"/>
-        </item>
-       </layout>
+       <layout class="QHBoxLayout" name="ResearchField"/>
       </item>
       <item>
        <widget class="QTreeView" name="view">
