@@ -93,11 +93,11 @@ void Tournament::writefile3(Tournament t, QString fileName){
         QJsonArray playersArray;
         QJsonObject playerObject;
         for (int j=0; j<t._teams->at(i)._count; j++){
-            playerObject.insert("User Name", QJsonValue::fromVariant(t._teams->at(i)._members.at(j)._username));
-            playerObject.insert("Email", QJsonValue::fromVariant(t._teams->at(i)._members.at(j)._email));
-            playerObject.insert("Weight", QJsonValue::fromVariant(t._teams->at(i)._members.at(j)._weight));
-            playerObject.insert("Height", QJsonValue::fromVariant(t._teams->at(i)._members.at(j)._height));
-            playerObject.insert("Age", QJsonValue::fromVariant(t._teams->at(i)._members.at(j)._age));
+            playerObject.insert("User Name", QJsonValue::fromVariant(t._teams->at(i)._members->at(j)._username));
+            playerObject.insert("Email", QJsonValue::fromVariant(t._teams->at(i)._members->at(j)._email));
+            playerObject.insert("Weight", QJsonValue::fromVariant(t._teams->at(i)._members->at(j)._weight));
+            playerObject.insert("Height", QJsonValue::fromVariant(t._teams->at(i)._members->at(j)._height));
+            playerObject.insert("Age", QJsonValue::fromVariant(t._teams->at(i)._members->at(j)._age));
 
             QString player_j = "Player" + QString::number(j);
             playersArray.push_back(playerObject);

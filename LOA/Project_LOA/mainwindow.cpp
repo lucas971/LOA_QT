@@ -37,13 +37,19 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::insertChild()
 {
     if (insertChildAction->text() == tr("Insert a new tournament")){
+        insertChildAction->setEnabled(true);
         createNewTournament();
     }
     else if (insertChildAction->text() == tr("Insert a new player")){
+        insertChildAction->setEnabled(true);
         createNewPlayer();
     }
     else if (insertChildAction->text() == tr("Insert a new team")){
+        insertChildAction->setEnabled(true);
         createNewPlayer();
+    }
+    else{
+        insertChildAction->setEnabled(false);
     }
 }
 
@@ -145,12 +151,12 @@ void MainWindow::updateActions()
         QAbstractItemModel *model = view->model();
 
         if (model->data((index)).toString() == "Teams"){
-            setInsertChildName(tr("new team"));
+            insertChildAction->setText(tr("Insert a new Team"));
         }
     }
 
     else{
-        setInsertChildName(tr("new tournament"));
+        insertChildAction->setText(tr("Insert a new Tournament"));
 
     }
 }
