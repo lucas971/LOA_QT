@@ -5,10 +5,10 @@
 #include <QString>
 class Player
 {
+
 public:
    int _id;
    static int _player_id;
-
    Player();
    Player(QString username, QString email);
    Player(QString username, QString email, double weight, double height, int age);

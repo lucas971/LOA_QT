@@ -17,6 +17,7 @@ public slots:
     void updateActions();
 
 private slots:
+    void createChild(QString name, QString type, QMap<int, QVariant> map);
     void insertChild();
     void removeRow();
     void setInsertChildName(QString typeToInsert);
@@ -27,6 +28,7 @@ private slots:
     void createNewTournament();
     void on_Valider_2_clicked();
     void on_Valider_clicked();
+    void on_pushButton_clicked();
 };
 
 #endif // MAINWINDOW_H

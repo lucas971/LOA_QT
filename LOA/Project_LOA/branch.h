@@ -2,7 +2,6 @@
 #define BRANCH_H
 
 #include "team.h"
-
 class Branch
 {
 

@@ -1,5 +1,6 @@
 #ifndef SPORT_H
 #define SPORT_H
+#include <string>
 #include <QString>
 
 class Sport
@@ -8,15 +9,12 @@ public:
 
    int _id;
    static int _sport_id;
+
+public:
    QString _sportname;
-   bool _team;
-   int _teamCount;
-
    Sport();
-   Sport(QString sportname, bool team, int teamCount);
-   Sport(const Sport & sport);
+   Sport(QString sportname);
    ~Sport();
-
 };
 
 #endif // SPORT_H

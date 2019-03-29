@@ -33,7 +33,8 @@ SOURCES += \
     treemodel.cpp \
     sport.cpp \
     branch.cpp \
-    tree.cpp
+    tree.cpp \
+    database.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -47,6 +48,7 @@ HEADERS += \
     tournament.h \
     tournamentDelegate.h \
     tournamentView.h \
+    database.h
 
 RESOURCES = \
     editabletreemodel.qrc

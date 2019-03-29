@@ -1,7 +1,6 @@
 #include "tournament.h"
 #include "sport.h"
 #include "team.h"
-#include "tree.h"
 #include <vector>
 #include <string>
 
@@ -16,27 +15,26 @@ int Tournament::_tourn_id=0;
 Tournament::Tournament(){
     _id=_tourn_id++;
     _tournamentname = "_";
-    _sport = Sport();
+    _sport = "_";
     _password = "";
     _roundCount = 1;
     _maxSub = 2;
     _sub = 2;
-    _teams = QVector<Team>();
     //_tournamenttree = Tree();
 }
 
 
-Tournament::Tournament(QString name, Sport sport, QString password, int roundCount, int maxSub, int sub, QVector<Team> teams){
-                       //, Tree tournamenttree){
+Tournament::Tournament(QString name, QString sport, QString password, int roundCount, int maxSub){
     _id=_tourn_id++;
     _tournamentname = name;
     _sport = sport;
     _password = password;
     _roundCount = roundCount;
     _maxSub = maxSub;
-    _sub = sub;
-    _teams = teams;
-    //_tournamenttree = tournamenttree;
+    _sub = 0;
+    _tournamenttree = new Tree(maxSub);
+    _teams = new QVector<Team>(maxSub);
+    return;
 }
 
 Tournament::Tournament(const Tournament & tournament){
@@ -54,7 +52,6 @@ Tournament::Tournament(const Tournament & tournament){
 Tournament::~Tournament(){
     delete this;
 }
-
 QJsonDocument loadJson(QString fileName) {
     QFile jsonFile(fileName);
     jsonFile.open(QFile::ReadOnly);
@@ -73,9 +70,7 @@ void Tournament::writefile3(Tournament t, QString fileName){
     tournamentObject.insert("Tournament name", QJsonValue::fromVariant(t._tournamentname));
 
     QJsonObject sportObject;
-    sportObject.insert("Sport name", QJsonValue::fromVariant((t._sport._sportname)));
-    sportObject.insert("Team", QJsonValue::fromVariant((t._sport._team)));
-    sportObject.insert("Team", QJsonValue::fromVariant((t._sport._teamCount)));
+    sportObject.insert("Sport name", QJsonValue::fromVariant((t._sport)));
 
     tournamentObject.insert("Sport", sportObject);
 
@@ -88,21 +83,21 @@ void Tournament::writefile3(Tournament t, QString fileName){
     QJsonObject teamsObject;
     QJsonObject teamObject;
 
-    for (int i=0; i<t._teams.size(); i++){
-        teamObject.insert("Team Name",QJsonValue::fromVariant(t._teams.at(i)._teamName));
-        teamObject.insert("Count",QJsonValue::fromVariant(t._teams.at(i)._count));
-        teamObject.insert("Website",QJsonValue::fromVariant(t._teams.at(i)._website));
+    for (int i=0; i<t._teams->size(); i++){
+        teamObject.insert("Team Name",QJsonValue::fromVariant(t._teams->at(i)._teamName));
+        teamObject.insert("Count",QJsonValue::fromVariant(t._teams->at(i)._count));
+        teamObject.insert("Website",QJsonValue::fromVariant(t._teams->at(i)._website));
 
         QString team_i = "Team" + QString::number(i);
 
         QJsonArray playersArray;
         QJsonObject playerObject;
-        for (int j=0; j<t._teams.at(i)._count; j++){
-            playerObject.insert("User Name", QJsonValue::fromVariant(t._teams.at(i)._members.at(j)._username));
-            playerObject.insert("Email", QJsonValue::fromVariant(t._teams.at(i)._members.at(j)._email));
-            playerObject.insert("Weight", QJsonValue::fromVariant(t._teams.at(i)._members.at(j)._weight));
-            playerObject.insert("Height", QJsonValue::fromVariant(t._teams.at(i)._members.at(j)._height));
-            playerObject.insert("Age", QJsonValue::fromVariant(t._teams.at(i)._members.at(j)._age));
+        for (int j=0; j<t._teams->at(i)._count; j++){
+            playerObject.insert("User Name", QJsonValue::fromVariant(t._teams->at(i)._members.at(j)._username));
+            playerObject.insert("Email", QJsonValue::fromVariant(t._teams->at(i)._members.at(j)._email));
+            playerObject.insert("Weight", QJsonValue::fromVariant(t._teams->at(i)._members.at(j)._weight));
+            playerObject.insert("Height", QJsonValue::fromVariant(t._teams->at(i)._members.at(j)._height));
+            playerObject.insert("Age", QJsonValue::fromVariant(t._teams->at(i)._members.at(j)._age));
 
             QString player_j = "Player" + QString::number(j);
             playersArray.push_back(playerObject);
@@ -122,7 +117,6 @@ void Tournament::writefile3(Tournament t, QString fileName){
     jsonFile.write(doc.toJson());
 
 }
-
 /*
     QJsonObject recordObject;
     recordObject.insert("FirstName", QJsonValue::fromVariant("John"));

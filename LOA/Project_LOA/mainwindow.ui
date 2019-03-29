@@ -55,7 +55,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="player">
        <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -210,6 +210,65 @@
        </widget>
       </widget>
       <widget class="QWidget" name="sport"/>
+      <widget class="QWidget" name="team">
+       <widget class="QWidget" name="verticalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>29</y>
+          <width>351</width>
+          <height>381</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <layout class="QFormLayout" name="formLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="teamNameLabel">
+             <property name="text">
+              <string>Team Name</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="teamNameLineEdit"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="websiteLabel">
+             <property name="text">
+              <string>Website </string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="websiteLineEdit"/>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="pushButton">
+             <property name="text">
+              <string>Create new team</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Number max of players :</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLCDNumber" name="NumberMaxOfPlayers"/>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -220,7 +279,7 @@
      <x>0</x>
      <y>0</y>
      <width>759</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="fileMenu">

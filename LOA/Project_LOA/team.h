@@ -10,13 +10,16 @@ class Team
 public:
     int _id;
     static int _team_id;
+
+
+public:
     int _count;
     QString _teamName;
     QString _website;
     QVector<Player> _members;
 
     Team();
-    Team(int count, QString name, QString website, QVector<Player> members);
+    Team(int count, QString name, QString website);
     Team(const Team & team);
     ~Team();
 };
