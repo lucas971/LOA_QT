@@ -55,7 +55,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="player">
        <widget class="QWidget" name="verticalLayoutWidget_2">
@@ -220,6 +220,51 @@
        </widget>
       </widget>
       <widget class="QWidget" name="sport"/>
+      <widget class="QWidget" name="teamEdit">
+       <widget class="QWidget" name="verticalLayoutWidget_4">
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>29</y>
+          <width>351</width>
+          <height>371</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <layout class="QFormLayout" name="formLayout_2">
+           <item row="0" column="0">
+            <widget class="QLabel" name="editTeamNameLabel">
+             <property name="text">
+              <string>Edit Team Name</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="editTeamNameLineEdit"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="editTeamWebsiteLabel">
+             <property name="text">
+              <string>Edit Team Website</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="editTeamWebsiteLineEdit"/>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="text">
+              <string>Accept Changes</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
       <widget class="QWidget" name="team">
        <widget class="QWidget" name="verticalLayoutWidget">
         <property name="geometry">
@@ -269,6 +314,41 @@
        </widget>
       </widget>
       <widget class="QWidget" name="nothing"/>
+      <widget class="QWidget" name="tournamentEdit">
+       <widget class="QWidget" name="verticalLayoutWidget_5">
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>29</y>
+          <width>351</width>
+          <height>381</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <layout class="QFormLayout" name="formLayout_3">
+           <item row="0" column="0">
+            <widget class="QLabel" name="editNameLabel">
+             <property name="text">
+              <string>Edit Name</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="editNameLineEdit"/>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="pushButton_3">
+             <property name="text">
+              <string>Accept Changes</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
      </widget>
     </item>
    </layout>

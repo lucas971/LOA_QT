@@ -7,11 +7,11 @@ int Player::_player_id=0;
 
 Player::Player(){
     _id=_player_id++;
-    _username="";
-    _email="";
-    _weight=65;
-    _height= 1.80;
-    _age=25;
+    _username="Unnamed player";
+    _email="No email";
+    _weight=0;
+    _height=0;
+    _age=18;
     return;
 }
 

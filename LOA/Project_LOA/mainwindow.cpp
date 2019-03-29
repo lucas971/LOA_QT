@@ -42,7 +42,16 @@ void MainWindow::insertChild()
 
 void MainWindow::on_Valider_clicked() //CREATION DE JOUEUR
 {
+    QModelIndex index = view->selectionModel()->currentIndex();
+    QAbstractItemModel *model = view->model();
 
+    Player *p = &_db->players.find(model->data(model->index(index.row(),2, index.parent())).toInt()).value();
+    p->_username = userNameLineEdit->text();
+    p->_age = ageSpinBox->value();
+    p->_email = mailLineEdit->text();
+    p->_height = heightDoubleSpinBox->value();
+    p->_weight = weightDoubleSpinBox->value();
+    model->setData(model->index(index.row(),0,index.parent()), p->_username, Qt::EditRole);
 }
 
 void MainWindow::createChild(QString name, QString type, int id = -1, QMap<int, QVariant> map = QMap<int, QVariant>()){
@@ -100,13 +109,10 @@ void MainWindow::on_Valider_2_clicked() //CREATION DE TOURNOI
     model->setData(child, tr("Tournament of ").append(t->_sport), Qt::EditRole);
 
     child = model->index(index.row()+1, 2, index.parent());
-    model->setData(child, t->_id, Qt::EditRole);
+    model->setData(child, t->_id , Qt::EditRole);
 
     view->selectionModel()->setCurrentIndex(model->index(0, 0, index),
                                             QItemSelectionModel::ClearAndSelect);
-
-    createChild(QString::number((t->_maxSub)), tr("Max Team"));
-    createChild(QString::number((t->_sub)), tr("Current Team Numbers"));
     createChild(tr("Teams"), tr(""));
     updateActions();
 }
@@ -144,9 +150,11 @@ void MainWindow::updateActions()
         if (model->data((index)).toString() == "Teams"){
             createNewTeam();
         }
-        qDebug() << model->index(index.row(),1, index.parent()).data();
-        if (model->index(index.row(),1, index.parent()).data().toString() == "Player"){
-            createNewPlayer();
+        else if (model->index(index.row(),1, index.parent()).data().toString() == "Player"){
+            editPlayer(model->index(index.row(),2, index.parent()).data().toInt());
+        }
+        else if (model->index(index.row(),1, index.parent()).data().toString() == "Team"){
+            editTeam(model->index(index.row(),2, index.parent()).data().toInt());
         }
         else{
             insertChildAction->setText(tr(""));
@@ -173,12 +181,13 @@ void MainWindow::chosePlayer(Player player){
     mailLineEdit->setText(player._email);
     stackedWidget->setCurrentIndex(0);
 }
-void MainWindow::createNewPlayer(){
-    ageSpinBox->setValue(0);
-    heightDoubleSpinBox->setValue(0);
-    weightDoubleSpinBox->setValue(0);
-    userNameLineEdit->setText(tr(""));
-    mailLineEdit->setText(tr(""));
+void MainWindow::editPlayer(int id){
+    Player p = _db->players.find(id).value();
+    ageSpinBox->setValue(p._age);
+    heightDoubleSpinBox->setValue(p._height);
+    weightDoubleSpinBox->setValue(p._weight);
+    userNameLineEdit->setText(p._username);
+    mailLineEdit->setText(p._email);
     stackedWidget->setCurrentIndex(0);
 }
 
@@ -188,22 +197,32 @@ void MainWindow::createNewTournament(){
     numberOfRoundsSpinBox->setValue(1);
     maxEntriesSpinBox->setValue(4);
     sportLineEdit->setText(tr(""));
-
-
     stackedWidget->setCurrentIndex(1);
+}
 
+void MainWindow::editTournament(int id){
+    Tournament t = _db->tournaments.find(id).value();
+    editNameLineEdit->setText(t._tournamentname);
+    stackedWidget->setCurrentIndex(8);
 }
 
 void MainWindow::createNewTeam(){
     teamNameLineEdit->setText(tr(""));
     websiteLineEdit->setText(tr(""));
+    stackedWidget->setCurrentIndex(5);
+}
+
+void MainWindow::editTeam(int id){
+    Team * t = &_db->teams.find(id).value();
+    editTeamNameLineEdit->setText(t->_teamName);
+    editTeamWebsiteLineEdit->setText(t->_website);
     stackedWidget->setCurrentIndex(4);
 }
 
 void MainWindow::showNothing(){
-    stackedWidget->setCurrentIndex(6);
+    stackedWidget->setCurrentIndex(7);
 }
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButton_clicked() // Team Creation
 {
     QModelIndex index = view->selectionModel()->currentIndex();
     QAbstractItemModel *model = view->model();
@@ -218,4 +237,24 @@ void MainWindow::on_pushButton_clicked()
         createChild(p->_username, tr("Player"), p->_id);
     }
     updateActions();
+}
+
+void MainWindow::on_pushButton_2_clicked() // Team Edition
+{
+    QModelIndex index = view->selectionModel()->currentIndex();
+    QAbstractItemModel *model = view->model();
+
+    Team *t = &_db->teams.find(model->data(model->index(index.row(),2, index.parent())).toInt()).value();
+    t->_teamName = editTeamNameLineEdit->text();
+    t->_website = editTeamWebsiteLineEdit->text();
+    model->setData(model->index(index.row(),0,index.parent()), t->_teamName, Qt::EditRole);
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    QModelIndex index = view->selectionModel()->currentIndex();
+    QAbstractItemModel *model = view->model();
+    Tournament *t = &_db->tournaments.find(model->data(model->index(index.row(),2, index.parent())).toInt()).value();
+    t->_tournamentname = editNameLineEdit->text();
+    model->setData(model->index(index.row(),0,index.parent()), t->_tournamentname, Qt::EditRole);
 }

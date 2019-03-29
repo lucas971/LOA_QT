@@ -25,13 +25,17 @@ private slots:
     void setInsertChildName(QString typeToInsert);
     void showNothing();
     void chosePlayer(Player player);
-    void createNewPlayer();
+    void editPlayer(int id);
     void createNewTeam();
+    void editTeam(int id);
 
     void createNewTournament();
+    void editTournament(int id);
     void on_Valider_2_clicked();
     void on_Valider_clicked();
     void on_pushButton_clicked();
+    void on_pushButton_2_clicked();
+    void on_pushButton_3_clicked();
 };
 
 #endif // MAINWINDOW_H
