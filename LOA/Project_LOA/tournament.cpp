@@ -46,7 +46,7 @@ Tournament::Tournament(const Tournament & tournament){
     _maxSub = tournament._maxSub;
     _sub = tournament._sub;
     _teams = tournament._teams;
-    //_tournamenttree = tournament._tournamenttree;
+    _tournamenttree = tournament._tournamenttree;
 }
 
 Tournament::~Tournament(){
@@ -108,9 +108,62 @@ void Tournament::writefile3(Tournament t, QString fileName){
     }
     tournamentObject.insert("Teams", teamsObject);
 
+
+    QJsonObject treeObject;
+    treeObject.insert("Height", QJsonValue::fromVariant(t._tournamenttree._height));
+    treeObject.insert("Width", QJsonValue::fromVariant(t._tournamenttree._width));
+
+    QJsonObject branchsObject;
+    QJsonObject branchObject;
+    QJsonObject team1Object;
+    QJsonObject team2Object;
+    for(int l=0; l<t._tournamenttree._branches->size(); l++){
+
+        team1Object.insert("Count", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team1._count));
+        team1Object.insert("Team Name", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team1._teamName));
+        team1Object.insert("Website", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team1._website));
+
+        QJsonArray playersArray;
+        QJsonObject playerObject;
+        for (int j=0; j<t._tournamenttree._branches->at(l)._team1._count; j++){
+            playerObject.insert("User Name", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team1._members.at(j)._username));
+            playerObject.insert("Email", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team1._members.at(j)._email));
+            playerObject.insert("Weight", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team1._members.at(j)._weight));
+            playerObject.insert("Height", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team1._members.at(j)._height));
+            playerObject.insert("Age", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team1._members.at(j)._age));
+
+            playersArray.push_back(playerObject);
+        }
+        team1Object.insert("Players", playersArray);
+        branchObject.insert("Team1", team1Object);
+
+        team2Object.insert("Count", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team2._count));
+        team2Object.insert("Team Name", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team2._teamName));
+        team2Object.insert("Website", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team2._website));
+
+        for (int j=0; j<t._tournamenttree._branches->at(l)._team2._count; j++){
+            playerObject.insert("User Name", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team2._members.at(j)._username));
+            playerObject.insert("Email", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team2._members.at(j)._email));
+            playerObject.insert("Weight", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team2._members.at(j)._weight));
+            playerObject.insert("Height", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team2._members.at(j)._height));
+            playerObject.insert("Age", QJsonValue::fromVariant(t._tournamenttree._branches->at(l)._team2._members.at(j)._age));
+
+            playersArray.push_back(playerObject);
+        }
+        team2Object.insert("Players", playersArray);
+        branchObject.insert("Team2", team2Object);
+
+        QString branch_l = "Branch_" + QString::number(l);
+
+        branchsObject.insert(branch_l, branchObject);
+    }
+    treeObject.insert("Tree", branchsObject);
+    tournamentObject.insert("Branches", treeObject);
+
     QJsonArray recordsArray;
     recordsArray.push_back(tournamentObject);
     QJsonDocument doc(recordsArray);
+
     //On écrit dans un fichier du nom fileName
     QFile jsonFile(fileName);
     jsonFile.open(QFile::WriteOnly);
